@@ -21,7 +21,7 @@ const AuthForm = () => {
     const enteredPassword = passwordRef.current.value;
 
     if (hasAccount) {
-        (async function(){
+        (async function logIn(){
             try{
                 const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCCzBR5DqvTrAYAQoNbzB9Xnj5JyWONWkQ`,{
                     method:'POST',
@@ -48,7 +48,7 @@ const AuthForm = () => {
                 }
 
             } catch(error){
-                alert(error.message)
+                console.log(error.message)
             }
         })();
 
@@ -58,7 +58,7 @@ const AuthForm = () => {
         alert("The password did not match!");
         return;
       }
-      (async function () {
+      (async function signUp() {
         try {
           const response = await fetch(
             `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCCzBR5DqvTrAYAQoNbzB9Xnj5JyWONWkQ`,
@@ -81,14 +81,14 @@ const AuthForm = () => {
             throw new Error(data.error.message);
           }
         } catch (error) {
-          alert(error.message);
+          console.log(error.message);
         }
       })();
     }
   };
   return (
     <div className="flex justify-center items-center mt-24">
-      <form className="shadow-md px-7 py-5 rounded" onSubmit={formHandler}>
+      <form className="shadow-md px-7 py-5 rounded-md bg-blue-100 border-2 border-blue-950" onSubmit={formHandler}>
         <h2 className="text-center text-xl font-semibold mb-5 ">{hasAccount ? `Sign In`:`Sign Up`}</h2>
         <div>
           <label htmlFor="email" className="text-sm font-medium">
@@ -124,13 +124,13 @@ const AuthForm = () => {
           />
         </div>}
         <div className="flex justify-center items-center">
-          <button className="py-1 px-2 bg-orange-500 hover:bg-orange-600 rounded-md shadow-md text-white font-medium mb-5">
+          <button className="py-1 px-2 bg-orange-500 hover:bg-orange-600 rounded-md shadow-md w-full text-white font-medium my-4">
             {hasAccount ? `Sign In`:`Sign Up`}
           </button>
         </div>
         <p className="text-sm text-slate-500 mr-1 text-center">
           {hasAccount ? `Not a user?`:`Already a user?`}
-          <button className="text-orange-500 ml-2 font-semibold" onClick={switchAuthHandler}>
+          <button className="text-orange-500 ml-2 font-semibold" onClick={switchAuthHandler} type="submit">
             {hasAccount ? `Sign Up`:`Sign In`}
           </button>
         </p>

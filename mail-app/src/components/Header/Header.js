@@ -3,9 +3,9 @@ import Navigation from "./Navigation";
 
 const Header = ()=>{
     return(
-        <header className="flex justify-between items-center py-8 px-10 text-white bg-blue-950">
+        <header className="flex justify-between items-center py-6 px-10 text-white bg-blue-950 font-sans">
             <h1 className="text-3xl font-semibold">
-                MyMail.com
+                <span className="text-orange-500">Swift</span>Mail
             </h1>
             <Navigation/>
         </header>
