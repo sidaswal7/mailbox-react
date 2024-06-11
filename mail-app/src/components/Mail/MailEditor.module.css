@@ -1,0 +1,11 @@
+.editor {
+    min-height: 17rem;
+    max-height: 17rem;
+    padding: 1rem;
+    margin: 5px 0;
+    border: 1px solid #f1f1f1;
+  }
+  
+  .toolbar {
+    margin: 5px 0;
+  }

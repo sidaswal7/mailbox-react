@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import Inbox from './pages/Inbox';
 import HomePage from './pages/Homepage';
 import { useSelector } from 'react-redux';
+import ComposeMailPage from './pages/ComposeMailPage';
 
 
 
@@ -27,6 +28,9 @@ function App() {
         </Route>
         <Route path="/inbox" exact>
           {isLoggedIn ? <Inbox/>: <Redirect to="/auth"/>}
+        </Route>
+        <Route path="/composemail" exact>
+        {isLoggedIn ? <ComposeMailPage/>: <Redirect to="/auth"/>}
         </Route>
       </Switch>
    </Fragment>

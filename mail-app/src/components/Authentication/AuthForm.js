@@ -88,7 +88,7 @@ const AuthForm = () => {
   };
   return (
     <div className="flex justify-center items-center mt-24">
-      <form className="shadow-md px-7 py-5 rounded-md bg-blue-100 border-2 border-blue-950" onSubmit={formHandler}>
+      <form className="shadow-md px-7 py-5 rounded-md bg-blue-100 border border-blue-950" onSubmit={formHandler}>
         <h2 className="text-center text-xl font-semibold mb-5 ">{hasAccount ? `Sign In`:`Sign Up`}</h2>
         <div>
           <label htmlFor="email" className="text-sm font-medium">

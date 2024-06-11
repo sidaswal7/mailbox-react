@@ -9,17 +9,17 @@ const Navigation = ()=>{
     return(
         <nav className="flex items-center">
             {isLoggedIn && <ul className="flex mr-5">
-                <li className="font-semibold text-lg mr-5 hover:text-yellow-400">
+                <li className="font-semibold text-lg mr-6 hover:text-orange-500">
                     <Link to="/home">Home</Link>
                 </li>
-                <li className="font-semibold text-lg mr-5 hover:text-yellow-400">
+                <li className="font-semibold text-lg mr-6 hover:text-orange-500">
                     <Link to="/inbox">Inbox</Link>
                 </li>
-                <li className="font-semibold text-lg mr-5 hover:text-yellow-400">
+                <li className="font-semibold text-lg mr-6 hover:text-orange-500">
                     <Link to="/about">About Us</Link>
                 </li>
             </ul>}
-            { isLoggedIn && <button className="py-1 px-2 bg-orange-500 hover:bg-orange-600 shadow-md rounded-md text-white font-medium" onClick={()=>dispatch(logout())}>Logout</button>}
+            { isLoggedIn && <button className="py-1 px-3 bg-orange-500 hover:bg-orange-600 shadow-md rounded-md text-white font-medium" onClick={()=>dispatch(logout())}>Logout</button>}
         </nav>
     )
 }
