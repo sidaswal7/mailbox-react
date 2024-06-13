@@ -54,11 +54,11 @@ const ComposeMail = ()=>{
                 </div>
                 <div className="flex mb-5">
                     <label className="font-bold text-slate-700 basis-1/12">To: </label>
-                    <input className="border border-slate-400 px-2 rounded-sm w-full basis-11/12"/>
+                    <input className="border border-slate-400 px-2 rounded-sm w-full basis-11/12" ref={toMailRef}/>
                 </div>
                 <div className="flex mb-5">
                     <label className="font-bold text-slate-700 basis-1/12">Subject: </label>
-                    <input className="border border-slate-400 px-2 rounded-sm w-full basis-11/12"/>
+                    <input className="border border-slate-400 px-2 rounded-sm w-full basis-11/12" ref={subjectRef}/>
                 </div>
                 <MailEditor onDoneEditing = {handleDoneEditing}/>
                 <div className="flex justify-center mt-6">

@@ -11,16 +11,19 @@ const authSlice = createSlice({
     initialState:inititalAuthState,
     reducers:{
         login(state,action){
-            localStorage.setItem('jwtToken', action.payload.jwtToken)
+            console.log(action.payload)
             state.isLoggedIn = true;
             state.jwtToken = action.payload.jwtToken;
-            localStorage.setItem('loggedUser',action.payload.email)
+            state.loggedUser = action.payload.loggedUser;
+            localStorage.setItem('jwtToken', action.payload.jwtToken)
+            localStorage.setItem('loggedUser',action.payload.loggedUser)
         },
         logout(state){
             localStorage.removeItem('jwtToken')
             localStorage.removeItem('loggedUser')
             state.isLoggedIn = false;
             state.jwtToken = null;
+            state.loggedUser = null;
         }
     }
 });
