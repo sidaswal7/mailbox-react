@@ -23,7 +23,7 @@ const AuthForm = () => {
     if (hasAccount) {
         (async function logIn(){
             try{
-                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCCzBR5DqvTrAYAQoNbzB9Xnj5JyWONWkQ`,{
+                const response = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAsMpYLLI9EKroNE2ZmjFjjhsukX5Xxntc`,{
                     method:'POST',
                     body:JSON.stringify({
                         email: enteredEmail,
@@ -63,7 +63,7 @@ const AuthForm = () => {
       (async function signUp() {
         try {
           const response = await fetch(
-            `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCCzBR5DqvTrAYAQoNbzB9Xnj5JyWONWkQ`,
+            `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAsMpYLLI9EKroNE2ZmjFjjhsukX5Xxntc`,
             {
               method: "POST",
               body: JSON.stringify({

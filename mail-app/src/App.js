@@ -8,6 +8,7 @@ import ComposeMailPage from './pages/ComposeMailPage';
 import SignUpPage from './pages/SignUpPage';
 import SignInPage from './pages/SignInPage';
 import SentMailPage from './pages/SentMailPage';
+import MailBodyPage from './pages/MailBodyPage';
 
 
 
@@ -28,8 +29,14 @@ function App() {
         <Route path="/inbox" exact>
           {isLoggedIn ? <Inbox/>: <Redirect to="/signin"/>}
         </Route>
+        <Route path="/inbox/:mailId" exact>
+          <MailBodyPage/>
+        </Route>
         <Route path="/sent">
           <SentMailPage/>
+        </Route>
+        <Route path="/sent/:mailId" exact>
+          <MailBodyPage/>
         </Route>
         <Route path="/composemail" exact>
         {isLoggedIn ? <ComposeMailPage/>: <Redirect to="/signin"/>}

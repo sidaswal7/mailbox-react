@@ -1,38 +1,58 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import MailEditor from "./MailEditor";
 const ComposeMail = ()=>{
 
     const email = useSelector((state)=>state.auth.loggedUser);
+    const [isValid, setIsValid] = useState(true);
     const toMailRef = useRef();
     const subjectRef = useRef();
     const history = useHistory();
-    let mailBody;
+    let content;
     const handleDoneEditing = (mailContent)=>{
-        mailBody = mailContent;
+        content = mailContent.content;
     }
+    const handleToMailChange = ()=>{
+        setIsValid(true);
+    }
+
     const sendEmailHandler = (event)=>{
+        console.log("form submit")
         event.preventDefault();
+        const enteredToMail = toMailRef.current.value;
+        const enteredSubject = subjectRef.current.value;
+        if(!enteredToMail || !enteredSubject){
+            setIsValid(false);
+            return;
+        }
+        if(!enteredToMail.includes('@')){
+            setIsValid(false);
+            return;
+        }
         const mailDetails = {
             from: email,
-            to: toMailRef.current.value,
-            subject: subjectRef.current.value,
-            body: mailBody,
+            to: enteredToMail,
+            subject: enteredSubject,
+            content: content,
           };
       
           async function sendMail() {
             const response = await fetch(
-              'https://mail-app-4636b-default-rtdb.firebaseio.com/mails.json',
+              `https://mymail-app-default-rtdb.firebaseio.com/${email.replace('.','')}/sentMails.json`,
               {
                 method: 'POST',
                 body: JSON.stringify(mailDetails),
               }
             );
-      
-            const data = await response.json();
-            console.log(response);
-            console.log(data);
+            if(response.ok){
+                history.replace("/sent")
+                await fetch(`https://mymail-app-default-rtdb.firebaseio.com/${enteredToMail.replace('.','')}/receivedMails.json`,{
+                    method: 'POST',
+                    body: JSON.stringify({...mailDetails, read:false})
+                })
+            }
+            
           }
       
           sendMail();
@@ -54,11 +74,11 @@ const ComposeMail = ()=>{
                 </div>
                 <div className="flex mb-5">
                     <label className="font-bold text-slate-700 basis-1/12">To: </label>
-                    <input className="border border-slate-400 px-2 rounded-sm w-full basis-11/12" ref={toMailRef}/>
+                    <input className={`border border-slate-400 px-2 rounded-sm w-full basis-11/12`} onChange={handleToMailChange} ref={toMailRef}/>
                 </div>
                 <div className="flex mb-5">
                     <label className="font-bold text-slate-700 basis-1/12">Subject: </label>
-                    <input className="border border-slate-400 px-2 rounded-sm w-full basis-11/12" ref={subjectRef}/>
+                    <input className={`border border-slate-400 px-2 rounded-sm w-full basis-11/12`} ref={subjectRef}/>
                 </div>
                 <MailEditor onDoneEditing = {handleDoneEditing}/>
                 <div className="flex justify-center mt-6">

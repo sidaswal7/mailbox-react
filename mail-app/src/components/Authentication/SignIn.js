@@ -13,11 +13,16 @@ const AuthForm = () => {
   const formHandler = (event) => {
     event.preventDefault();
     const enteredEmail = emailRef.current.value;
-    const enteredPassword = passwordRef.current.value;                
+    const enteredPassword = passwordRef.current.value;  
+    
+    if(!enteredEmail || !enteredPassword){
+        alert("Please enter all the details");
+        return;
+    }
     async function signIn() {
         try {
           const response = await fetch(
-            `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCCzBR5DqvTrAYAQoNbzB9Xnj5JyWONWkQ`,
+            `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAsMpYLLI9EKroNE2ZmjFjjhsukX5Xxntc`,
             {
               method: "POST",
               body: JSON.stringify({

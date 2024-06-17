@@ -19,6 +19,7 @@ const authSlice = createSlice({
             localStorage.setItem('loggedUser',action.payload.loggedUser)
         },
         logout(state){
+            console.log(state)
             localStorage.removeItem('jwtToken')
             localStorage.removeItem('loggedUser')
             state.isLoggedIn = false;
