@@ -1,7 +1,8 @@
 import React, { useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import MailEditor from "./MailEditor";
+import { setSentMails } from "../../store/EmailSlice";
 const ComposeMail = ()=>{
 
     const email = useSelector((state)=>state.auth.loggedUser);
@@ -9,6 +10,7 @@ const ComposeMail = ()=>{
     const toMailRef = useRef();
     const subjectRef = useRef();
     const history = useHistory();
+    const dispatch = useDispatch()
     let content;
     const handleDoneEditing = (mailContent)=>{
         content = mailContent.content;
@@ -46,6 +48,8 @@ const ComposeMail = ()=>{
               }
             );
             if(response.ok){
+                const data = response.json();
+                dispatch(setSentMails({id:data.name,mail:mailDetails}))
                 history.replace("/sent")
                 await fetch(`https://mymail-app-default-rtdb.firebaseio.com/${enteredToMail.replace('.','')}/receivedMails.json`,{
                     method: 'POST',

@@ -32,7 +32,7 @@ function App() {
         <Route path="/inbox/:mailId" exact>
           <MailBodyPage/>
         </Route>
-        <Route path="/sent">
+        <Route path="/sent" exact>
           <SentMailPage/>
         </Route>
         <Route path="/sent/:mailId" exact>

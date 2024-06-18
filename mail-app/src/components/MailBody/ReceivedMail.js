@@ -43,7 +43,7 @@ const ReceivedMail = ()=>{
         content = (
             <ul>
                 {receivedMails.map((m)=>{
-                    return <MailList key={m.id} id={m.id} mail={m.mail} label="From: "/>
+                    return <MailList key={m.id} id={m.id} mail={m.mail} label="From: " to={`/inbox/${m.id}`}/>
                 })}
             </ul>
         )

@@ -11,9 +11,8 @@ const SentMail = ()=>{
     const fetchMail = async()=>{
         const response = await fetch(`https://mymail-app-default-rtdb.firebaseio.com/${email.replace('.','')}/sentMails.json`);
         const data = await response.json();
+        let maildata = [];
         console.log(data,"this is data")
-        const mailData = [];
-        let unreadMails = 0;
         for(let key in data){
             const content = data[key].content;
             if(!content.entityMap) content.entityMap = {};
@@ -23,14 +22,10 @@ const SentMail = ()=>{
                 if (!c.inlineStyleRanges) c.inlineStyleRanges = [];
                 return c;
             });
-            if(data[key].read === false) unreadMails = unreadMails+1;
-
-            mailData.push({
-                id:key,
-                mail:data[key],
-            });
+            maildata.push({mail:data[key], id:key})
         }
-        dispatch(setSentMails(mailData))
+        dispatch(setSentMails(maildata))
+       
         
     }
     useEffect(()=>{
@@ -43,7 +38,7 @@ const SentMail = ()=>{
         content = (
             <ul>
                 {sentMails.map((m)=>{
-                    return <MailList key={m.id} id={m.id} mail={m.mail} label="To:"/>
+                    return <MailList key={m.id} id={m.id} mail={m.mail} label="To:" to={`/sent/${m.id}`}/>
                 })}
             </ul>
         )
